@@ -1,0 +1,21 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite the repository and the associated paper."
+title: "rsfphate"
+version: "0.1.0"
+type: software
+authors:
+  - family-names: "Sanchez"
+    given-names: "Luciano"
+repository-code: "https://github.com/YOUR-ACCOUNT/rsfphate"
+license: "MIT"
+abstract: >
+  Public Python implementation of RSF-PHATE survival clustering based on
+  path-aware random survival forest proximities, diffusion smoothing,
+  PHATE embedding, and spectral discretization.
+keywords:
+  - survival analysis
+  - clustering
+  - PHATE
+  - random survival forest
+  - censored data
+

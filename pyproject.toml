@@ -1,0 +1,34 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "rsfphate"
+version = "0.1.0"
+description = "Path-aware survival clustering with random survival forest proximities, diffusion smoothing, PHATE, and spectral clustering."
+readme = "README.md"
+license = {file = "LICENSE"}
+authors = [
+  {name = "Luciano Sanchez"}
+]
+requires-python = ">=3.10,<3.13"
+dependencies = [
+  "numpy<2",
+  "scipy<1.14",
+  "scikit-learn>=1.5,<1.8",
+  "scikit-survival>=0.24,<0.28",
+  "phate>=1.0,<3.0",
+  "rfgap @ git+https://github.com/jakerhodes/RF-GAP-Python@4b4655e85caa568829c32b180d138b38df7fc045",
+]
+
+[project.optional-dependencies]
+dev = [
+  "pytest>=8,<9",
+]
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
