@@ -1,18 +1,11 @@
 # `rsfphate`
 
-`rsfphate` is a small public Python library that exposes the core contribution of the paper:
+`rsfphate` is a public Python library that exposes the core contribution of the paper Fusing Covariates and Censored Outcomes via Reliability-Weighted Diffusion:
 
 - path-aware random survival forest proximities,
 - diffusion smoothing with teleportation,
 - PHATE embedding,
 - and survival clustering through spectral discretization.
-
-This repository is intentionally narrower than the private research codebase. It does **not** include:
-
-- benchmark orchestration,
-- copied baseline implementations such as VaDeSC,
-- paper-specific case-study code,
-- or manuscript-only utilities.
 
 The goal is to provide a clean, reusable library that another user can import into their own project with a minimal API.
 
@@ -98,10 +91,9 @@ python examples/basic_usage.py
 
 ## Design notes
 
-- The implementation keeps the path-aware proximity logic from the research code.
 - The public package defaults to a dense proximity matrix because it is the simplest interface for downstream PHATE and clustering.
 - Clustering defaults to Yu-Shi spectral discretization on the smoothed similarity matrix.
-- The library is intentionally focused on the proposed method only.
+
 
 ## Repository layout
 
