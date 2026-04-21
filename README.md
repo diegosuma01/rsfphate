@@ -1,6 +1,6 @@
 # `rsfphate`
 
-`rsfphate` is a public Python library that exposes the core contribution of the paper Fusing Covariates and Censored Outcomes via Reliability-Weighted Diffusion:
+`rsfphate` is a public Python library that exposes the core contribution of the paper `Fusing Covariates and Censored Outcomes via Reliability-Weighted Diffusion`:
 
 - path-aware random survival forest proximities,
 - diffusion smoothing with teleportation,
@@ -16,12 +16,6 @@ python3.10 -m venv .venv
 source .venv/bin/activate
 pip install -U pip
 pip install -e .
-```
-
-For development:
-
-```bash
-pip install -e .[dev]
 ```
 
 ## Quick start
@@ -103,4 +97,3 @@ python examples/basic_usage.py
 - `tests/`: smoke tests
 - `CHANGELOG.md`: release notes
 - `CITATION.cff`: citation metadata for GitHub
-- `PUBLISHING.md`: instructions to publish this folder as a standalone GitHub repository
