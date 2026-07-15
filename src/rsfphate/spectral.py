@@ -11,7 +11,7 @@ from scipy.sparse.csgraph import laplacian as csgraph_laplacian
 def yu_shi(
     similarity: np.ndarray,
     n_clusters: int,
-    n_iter: int = 20,
+    n_iter: int = 100, #numerin de iteraciones para la rotación de Procrustes
     tol: float = 1e-6,
     eps: float = 1e-12,
     drop_isolated: bool = False,

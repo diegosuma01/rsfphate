@@ -35,7 +35,7 @@ class RSFPhate(BaseEstimator, ClusterMixin):
     def __init__(
         self,
         n_clusters: int = 3,
-        n_estimators: int = 100,
+        n_estimators: int = 100, #number of trees in the random forest
         min_samples_split: int = 10,
         min_samples_leaf: int = 5,
         max_depth: int | None = None,
