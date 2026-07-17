@@ -1,0 +1,20 @@
+# Entorno conda equivalente a requirements.txt
+# Crear:  conda env create -f environment.yml
+# Activar: conda activate rsfphate
+name: rsfphate
+channels:
+  - conda-forge
+dependencies:
+  - python=3.11
+  - numpy<2.0
+  - scipy<1.14
+  - scikit-learn>=1.5,<1.8
+  - pandas>=1.3
+  - matplotlib>=3.5
+  - seaborn>=0.12
+  - jupyter>=1.0
+  - pytest>=8,<9
+  - pip
+  - pip:
+      - scikit-survival>=0.24,<0.28
+      - phate>=1.0,<3.0

@@ -16,7 +16,8 @@ This repository contains the implementation and results from the **Master's Thes
 - Robustness under informative censoring (p-boxes)
 - Commercial interpretability: actionable cluster profiles with business recommendations
 
-See the full thesis document: `ENTREGA_TFG/TFG_Diego_Suarez_Maranon.docx`
+The full thesis document (memoria) is delivered separately (not versioned here due to
+file-size limits). The method, results and annexes are fully described in it.
 
 ## Installation
 
@@ -24,11 +25,11 @@ See the full thesis document: `ENTREGA_TFG/TFG_Diego_Suarez_Maranon.docx`
 
 ```bash
 # Clone and navigate
-git clone https://github.com/yourusername/rsfphate.git
+git clone https://github.com/diegosuma01/rsfphate.git
 cd rsfphate
 
 # Create virtual environment
-python3.10 -m venv .venv
+python3.11 -m venv .venv
 source .venv/bin/activate  # On Windows: .venv\Scripts\activate
 
 # Install dependencies
@@ -37,13 +38,52 @@ pip install -r requirements.txt
 pip install -e .
 ```
 
-### Option 2: Install just dependencies
+### Option 2: Conda environment
 
 ```bash
-pip install -r requirements.txt
+conda env create -f environment.yml
+conda activate rsfphate
 ```
 
-**Python version**: 3.10+ (tested on 3.10, 3.11)
+### Option 3: Docker (fully reproducible environment)
+
+```bash
+docker build -t rsfphate .
+docker run --rm -v ${PWD}/data:/app/data rsfphate   # runs run_experiments.py
+```
+
+**Python version**: 3.11 (tested on 3.10, 3.11)
+
+## Configuration
+
+All hyperparameters are **externalized** in [`config.yaml`](config.yaml) — no values are
+hardcoded in the source. To explore a different setting (e.g. `n_clusters`,
+`diffusion_time`, sample size) edit the YAML file; the code reads it at runtime.
+Data paths are also parameterized there, so no dataset is committed to the repository.
+
+Key parameters (matching Table 4.1 of the thesis):
+
+| Parameter | Value |
+|-----------|-------|
+| `n_estimators` | 100 |
+| `min_samples_split` | 10 |
+| `diffusion_time` | 7.0 (explored 4.0 / 7.0 / 10.0) |
+| `n_clusters` | 3 |
+| `sample_size` | 1200 (stratified) |
+| `random_state` | 42 |
+
+## Testing
+
+A `pytest` suite covers every stage of the pipeline (preprocessing, RSF training,
+cophenetic similarity, PHATE diffusion, spectral clustering), plus reproducibility
+and edge cases:
+
+```bash
+pytest tests/ -v      # 16 tests, all passing
+```
+
+Acceptance criteria (see thesis Annex 10.11): full pipeline runs in < 5 min and
+< 4 GB RAM for the 1,200-contract sample; `random_state` guarantees reproducibility.
 
 ## Quick Start
 
@@ -149,9 +189,10 @@ Generate synthetic survival-clustering problem (concentric rings).
 
 ## Examples
 
-Basic usage:
+Standalone scripts:
 ```bash
-python examples/basic_usage.py
+python examples/churn_preprocessing.py          # semantic preprocessing
+python examples/2_generador_datos_sinteticos.py # synthetic data generator
 ```
 
 Full thesis reproduction:
@@ -169,12 +210,19 @@ jupyter notebook notebooks/
 
 ## Repository Structure
 
-- `src/rsfphate/` — Main library (model.py, forest.py, spectral.py, datasets.py)
-- `notebooks/` — Reproduction scripts for thesis results (EDA, main analysis, validation, multiproducto)
-- `examples/` — Minimal usage examples
-- `tests/` — Unit tests
-- `ENTREGA_TFG/` — Final delivery folder with thesis PDF, results, figures
-- `requirements.txt` — Python dependencies
+- `src/rsfphate/` — Main library: `datasets.py` (preprocessing / synthetic data),
+  `forest.py` (RSF training + cophenetic similarity), `model.py` (PHATE diffusion +
+  orchestration), `spectral.py` (Yu-Shi spectral clustering)
+- `notebooks/` — Reproduction of thesis results (EDA, main analysis, synthetic
+  validation, multiproduct, hold-out)
+- `examples/` — Standalone scripts (preprocessing, synthetic data generator)
+- `tests/` — `pytest` suite (16 tests)
+- `run_experiments.py` — Reproduces all reported results end to end
+- `config.yaml` — Externalized hyperparameters and data paths
+- `Dockerfile` / `environment.yml` — Reproducible environments
+- `requirements.txt` — Pinned Python dependencies
+- `CITATION.cff` — Citation metadata (version v1.0.0)
+- `ARCHITECTURE.md` — Component architecture (C4-level description)
 
 ## Citation
 

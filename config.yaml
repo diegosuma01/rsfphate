@@ -1,0 +1,47 @@
+# =============================================================================
+# Configuración del pipeline RSF-PHATE
+# Externaliza todos los hiperparámetros para no fijarlos en el código.
+# Coincide con la Tabla 4.1 de la memoria del TFG.
+# Uso: los scripts leen este fichero; sobrescribir aquí sin tocar el código.
+# =============================================================================
+
+data:
+  # Ruta al dataset de contratos (CSV). Parametrizada: no se versiona el dato.
+  input_csv: "data/contratos.csv"
+  # Columna de tiempo (días activo) y de evento (baja voluntaria)
+  time_col: "ANTIGUEDAD_CLIENTE"
+  event_col: "TARGET"
+
+preprocessing:
+  # Submuestreo estratificado por evento (limitación cuadrática O(N^2))
+  sample_size: 1200
+  stratify_by_event: true
+  # Imputación semántica de valores faltantes
+  imputation: "semantic"
+
+model:
+  rsf:
+    n_estimators: 100
+    min_samples_split: 10
+    split_rule: "logrank"
+  similarity:
+    type: "cophenetic"          # similitud basada en rutas de árbol
+  phate:
+    diffusion_time: 7.0         # seleccionado explorando {4.0, 7.0, 10.0}
+    n_components: 2
+  clustering:
+    algorithm: "yu-shi"          # clustering espectral multiclase
+    n_clusters: 3
+
+evaluation:
+  compute_baseline: true         # Cox + K-Means
+  cox_alpha: 0.01
+  holdout_split: 0.30            # validación hold-out 70/30
+
+reproducibility:
+  random_state: 42
+
+output:
+  # Exportación de la asignación de cluster a CSV (requisito funcional RF9)
+  export_labels_csv: "output/cluster_labels.csv"
+  figures_dir: "output/figures"

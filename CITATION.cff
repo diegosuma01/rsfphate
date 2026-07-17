@@ -1,21 +1,26 @@
 cff-version: 1.2.0
-message: "If you use this software, please cite the repository and the associated paper."
-title: "rsfphate"
-version: "0.1.0"
+message: "If you use this software, please cite the repository and the associated thesis."
+title: "rsfphate: RSF-PHATE survival clustering"
+version: "1.0.0"
+date-released: "2026-07-17"
 type: software
 authors:
-  - family-names: "Sanchez"
-    given-names: "Luciano"
-repository-code: "https://github.com/YOUR-ACCOUNT/rsfphate"
+  - family-names: "Suárez Marañón"
+    given-names: "Diego"
+    email: "diegosuarezma@gmail.com"
+    affiliation: "Universidad de Oviedo — Escuela Politécnica de Ingeniería de Gijón"
+repository-code: "https://github.com/diegosuma01/rsfphate"
 license: "MIT"
 abstract: >
-  Public Python implementation of RSF-PHATE survival clustering based on
-  path-aware random survival forest proximities, diffusion smoothing,
-  PHATE embedding, and spectral discretization.
+  Python implementation of RSF-PHATE survival clustering, based on path-aware
+  random survival forest cophenetic proximities, heat-kernel diffusion smoothing,
+  PHATE embedding and Yu-Shi spectral discretization. Developed for the Bachelor's
+  Thesis (TFG) on customer-churn survival segmentation in an electricity retailer,
+  supervised by Luciano Sánchez.
 keywords:
   - survival analysis
   - clustering
+  - churn
   - PHATE
   - random survival forest
   - censored data
-
