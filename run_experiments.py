@@ -98,7 +98,7 @@ def main():
         print("\nKey results:")
         print("  • Real data: 3 clusters identified (Churn Risk n=226, Loyal n=577, Moderate n=365)")
         print("  • Synthetic validation: ARI = 0.48 (robust method)")
-        print("  • Multiproducto: ARI = 0.26 (joint model less separable)")
+        print("  • Multiproducto: ARI(A,B) = 0.26 (gas reorganizes the segmentation; protective factor)")
         return 0
     else:
         print(f"\n❌ {total - passed} experiment(s) failed. Check output above.")

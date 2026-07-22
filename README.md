@@ -4,7 +4,7 @@ A Python library implementing the RSF-PHATE method: a novel approach for **survi
 
 ## Context
 
-This repository contains the implementation and results from the **Master's Thesis: "Survival Clustering in Energy Commercial Contracts: An RSF-PHATE Approach"** (Diego Suárez Marañón, 2024).
+This repository contains the implementation and results from the **Bachelor's Thesis (TFG): "Survival Clustering in Energy Commercial Contracts: An RSF-PHATE Approach"** (Diego Suárez Marañón, 2026).
 
 **Goal**: Segment electricity customers into risk-based groups (Churn Risk, Loyal, Moderate Risk) to enable targeted retention strategies, validated on real commercial data and synthetic survival data.
 
@@ -122,7 +122,7 @@ See the notebooks in `notebooks/`:
 2. **`eda_datos_sinteticos.ipynb`** — Exploratory analysis of synthetic validation data
 3. **`analisis_churn_survival.ipynb`** — Main analysis: RSF-PHATE on real contracts → 3 clusters (Churn Risk, Loyal, Moderate Risk)
 4. **`validacion_sintetica.ipynb`** — Validate method on synthetic data with known ground truth (ARI=0.48)
-5. **`analisis_multiproducto.ipynb`** — Multi-product analysis: Does gas data improve prediction? (ARI=0.26)
+5. **`analisis_multiproducto.ipynb`** — Multi-product analysis: does gas tenure reshape the segmentation? (ARI between configs = 0.26; gas acts as a protective factor)
 
 Run all notebooks:
 ```bash
@@ -156,9 +156,10 @@ Expected runtime: ~10-15 min total (on modern CPU)
 
 ### Multiproduct Analysis
 
-- Dataset: Electricity + gas (1,200 + 312 cross-product links)
-- Joint model: **ARI = 0.26** (clustering less separable with multiproduct features)
-- Implication: Product diversification weakens pure-churn signals
+- Two configurations on the **same customers and seed**: Config A (with gas / multiproduct features) vs Config B (electricity only)
+- Agreement between the two partitions: **ARI(A, B) = 0.26** — adding gas *substantially reorganizes* the segmentation, so multiproduct information is **not redundant**
+- Gas tenure acts as a **protective factor**: churn declines monotonically with the number of active products (8.2% with one product → 5.6% with four or more), and moderate-risk customers migrate toward the loyal core once gas is known
+- Business implication: **cross-selling is itself a retention lever**
 
 ## Public API
 
@@ -229,11 +230,12 @@ jupyter notebook notebooks/
 If you use this method, cite the thesis:
 
 ```bibtex
-@mastersthesis{suarez_maranon_2024,
+@mastersthesis{suarez_maranon_2026,
   author={Suárez Marañón, Diego},
   title={Survival Clustering in Energy Commercial Contracts: An RSF-PHATE Approach},
   school={Universidad de Oviedo},
-  year={2024}
+  type={Bachelor's Thesis (Trabajo Fin de Grado)},
+  year={2026}
 }
 ```
 
